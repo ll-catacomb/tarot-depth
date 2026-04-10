@@ -1,6 +1,6 @@
 const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
 const MODEL_VERSION =
-  "6d77a07ef88e8a09389385cb14d98b12629a4b23b0537b01dfeb833c32827546";
+  "6c4ebdf049df552f8c02b3a7bbb3afec3d37b20924282bab8744f1168b6de470";
 
 export async function POST(request: Request) {
   try {
@@ -23,7 +23,7 @@ export async function POST(request: Request) {
         body: JSON.stringify({
           version: MODEL_VERSION,
           input: {
-            prompt: `A tarot card depicting ${word}, in the style of tarot-cards/rider-waite`,
+            prompt: `${word} in the style of TOK a trtcrd, tarot style`,
           },
         }),
       }

@@ -24,6 +24,8 @@ export async function POST(request: Request) {
           version: MODEL_VERSION,
           input: {
             prompt: `${word} in the style of TOK a trtcrd, tarot style`,
+            num_outputs: 1,
+            aspect_ratio: "2:3",
           },
         }),
       }

@@ -150,7 +150,7 @@ export default function TiltCard({ imageUrl }: TiltCardProps) {
         <img
           src={imageUrl}
           alt="Generated tarot card"
-          className="w-72 rounded-xl"
+          className="max-w-72 w-full h-auto rounded-xl"
           draggable={false}
         />
         <MetallicBadge tiltX={tilt.x} tiltY={tilt.y} />

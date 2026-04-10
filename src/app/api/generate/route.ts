@@ -1,0 +1,67 @@
+const REPLICATE_API_TOKEN = process.env.REPLICATE_API_TOKEN;
+const MODEL_VERSION =
+  "6d77a07ef88e8a09389385cb14d98b12629a4b23b0537b01dfeb833c32827546";
+
+export async function POST(request: Request) {
+  try {
+    const { word } = await request.json();
+
+    if (!word || typeof word !== "string") {
+      return Response.json({ error: "A word is required" }, { status: 400 });
+    }
+
+    // Use the HTTP API directly to get a clean URL string
+    const createRes = await fetch(
+      `https://api.replicate.com/v1/predictions`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${REPLICATE_API_TOKEN}`,
+          Prefer: "wait",
+        },
+        body: JSON.stringify({
+          version: MODEL_VERSION,
+          input: {
+            prompt: `A tarot card depicting ${word}, in the style of tarot-cards/rider-waite`,
+          },
+        }),
+      }
+    );
+
+    if (!createRes.ok) {
+      const errBody = await createRes.text();
+      console.error("Replicate API error:", createRes.status, errBody);
+      return Response.json(
+        { error: "Failed to generate tarot card" },
+        { status: 500 }
+      );
+    }
+
+    const prediction = await createRes.json();
+    console.log("Prediction status:", prediction.status);
+    console.log("Prediction output:", prediction.output);
+
+    // Output is typically an array of URL strings
+    const imageUrl =
+      Array.isArray(prediction.output) && prediction.output.length > 0
+        ? prediction.output[0]
+        : prediction.output;
+
+    if (!imageUrl || typeof imageUrl !== "string") {
+      console.error("Unexpected output:", prediction);
+      return Response.json(
+        { error: "Unexpected model output" },
+        { status: 500 }
+      );
+    }
+
+    return Response.json({ imageUrl });
+  } catch (error) {
+    console.error("Replicate tarot generation error:", error);
+    return Response.json(
+      { error: "Failed to generate tarot card" },
+      { status: 500 }
+    );
+  }
+}

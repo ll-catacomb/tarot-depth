@@ -21,33 +21,27 @@ export default function MetallicBadge({ tiltX, tiltY }: MetallicBadgeProps) {
       style={{
         background: `
           radial-gradient(
-            circle at ${highlightX}% ${highlightY}%,
-            rgba(255,255,255,0.18) 0%,
-            rgba(200,200,210,0.06) 30%,
-            transparent 60%
+            ellipse at ${highlightX}% ${highlightY}%,
+            rgba(255,255,255,0.07) 0%,
+            transparent 50%
           ),
           conic-gradient(
             from ${gradAngle}deg,
-            #78787f 0%,
-            #93939a 10%,
-            #a8a8b0 18%,
-            #8e8e96 28%,
-            #7a7a82 38%,
-            #96969e 48%,
-            #a5a5ad 55%,
-            #8a8a92 65%,
-            #7c7c84 75%,
-            #94949c 85%,
-            #a0a0a8 92%,
-            #78787f 100%
+            #848488 0%,
+            #8a8a8e 15%,
+            #919196 30%,
+            #8c8c90 45%,
+            #86868a 60%,
+            #8e8e93 75%,
+            #8a8a8f 90%,
+            #848488 100%
           )
         `,
         boxShadow: `
-          inset ${shadowX}px ${shadowY}px 2px rgba(0,0,0,0.4),
-          inset ${-shadowX * 0.3}px ${-shadowY * 0.3}px 1.5px rgba(255,255,255,0.1),
-          inset 0 0 3px 1px rgba(0,0,0,0.2)
+          inset ${shadowX}px ${shadowY}px 1.5px rgba(0,0,0,0.3),
+          inset 0 0 2px 0.5px rgba(0,0,0,0.15)
         `,
-        border: "1px solid rgba(60,60,70,0.5)",
+        border: "1px solid rgba(70,70,75,0.4)",
       }}
     >
       <span
@@ -56,12 +50,10 @@ export default function MetallicBadge({ tiltX, tiltY }: MetallicBadgeProps) {
           fontFamily: "var(--font-eb-garamond), 'EB Garamond', serif",
           fontSize: "11px",
           letterSpacing: "-0.5px",
-          color: "rgba(55,55,62,0.9)",
+          color: "rgba(62,62,67,0.85)",
           textShadow: [
-            `${0.3 - tiltX * 0.1}px ${0.5 + tiltY * 0.1}px 0.5px rgba(200,200,210,0.35)`,
-            `${-0.2 + tiltX * 0.08}px ${-0.4 - tiltY * 0.08}px 0.5px rgba(0,0,0,0.5)`,
-            `0px -0.3px 1px rgba(0,0,0,0.3)`,
-            `0px 0.6px 0px rgba(255,255,255,0.12)`,
+            `0px 0.5px 0px rgba(170,170,175,0.25)`,
+            `0px -0.5px 0.5px rgba(0,0,0,0.4)`,
           ].join(", "),
         }}
       >
